@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Geog 483 Leaflet Tutorial</title>
+	<!-- This tutorial is based on the official Leaflet quickstart: http://leafletjs.com/examples/quick-start/ -->
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+
+</head>
+<body>
+
+<style>
+    	body { margin:0; padding:0; }
+    	#mapid { position:absolute; top:50px; bottom:50px; left:50px; width:500px; height:500px;}
+</style>
+
+<div id="mapid"</div>
+<script src="coffeeshop.geoJson" type="text/javascript"></script>
+<script type='text/javascript'>
+	var mymap = L.map('mapid').setView([43.470, -80.545], 15);
+
+	L.tileLayer("http://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
+	}).addTo(mymap);
+
+	function onEachFeature(feature, layer) {
+    if (feature.properties) {
+		layer.bindPopup("<center><b><font size=4 color=#DFDD33 face=cursive>" + feature.properties.name + "</font></b></center>" +
+						"<table>" +
+						"<tr>" + "<th>Location: </th>" + "<th>" + feature.properties.building_n + "</th>" + "</tr>" +
+						"<tr>" + "<th>Coffee (S/M/L): </th>" + "<th>" + "$" + feature.properties.coffee_pri + " / " + feature.properties.coffee_p_1 + " / " + feature.properties.coffee_p_2 + "</th>" + "</tr>" +
+						"<tr>" + "<th>Tea (S): </th>" + "<th>" + "$" + feature.properties.tea_price_ + "</th>" + "</tr>" +
+						"<tr>" + "<th>Hot Chocolate (L): </th>" + "<th>" + "$" + feature.properties.chocolate_ + "</th>" + "</tr>" +
+						"<tr>" + "<th>Can of Pop: </th>" + "<th>" + "$" + feature.properties.can_of_pop + "</th>" + "</tr>" +
+						"<tr>" + "<th>Muffin: </th>" + "<th>" + "$" + feature.properties.muffin_pri + "</th>" + "</tr>" +
+						"</table>");
+    }
+	}
+	var coffeeshop = new L.geoJson(coffeeshop, {
+		onEachFeature: onEachFeature
+	}).addTo(mymap);
+</script>
+
+</body>
+</html>
