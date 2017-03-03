@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Geog 483 Leaflet Tutorial</title>
+	<!-- This tutorial is based on the official Leaflet quickstart: http://leafletjs.com/examples/quick-start/ -->
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+
+</head>
+<body>
+
+<style>
+    	body { margin:0; padding:0; }
+    	#mapid { position:absolute; top:50px; bottom:50px; left:50px; width:500px; height:500px;}
+</style>
+
+<div id="mapid"</div>
+<script>
+
+	var mymap = L.map('mapid').setView([43.466, -80.53], 15);
+
+	L.tileLayer("http://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
+	}).addTo(mymap);
+	
+	L.marker([43.466, -80.530]).addTo(mymap)
+		.bindPopup("<b>Hello world!</b><br />I am a popup.");
+	
+	//***************************************************************************************
+	//Marker #2
+	L.marker([43.465, -80.533]).addTo(mymap)
+		.bindPopup("This is a link to <a href=https://www.google.ca>Google Canada</a>");
+	
+	//Marker #3
+	L.marker([43.462, -80.535]).addTo(mymap)
+		.bindPopup(
+			L.popup({minWidth:190})
+			.setContent("<b>CLICK ON THE IMAGE BELOW:</b><br><a href=https://www.google.ca><img src=googleLogo.png alt=GOOGLE></br></a>")
+		);
+	
+	//Marker #4
+	//Define variable to store icon parameters for marker#4
+	var globeIcon = L.icon({
+		iconUrl: 'globeIcon.png',
+		iconAnchor: [10, 30],
+		popupAnchor: [6, -25]
+	})
+	L.marker([43.469, -80.531], {icon: globeIcon}).addTo(mymap)
+		.bindPopup("Hi, I am a GLOBE popup!");
+	
+	//Marker #5
+	//Define variable to store icon parameters for marker#5
+	var heartIcon = L.icon({
+		iconUrl: 'heartIcon.png',
+		iconAnchor: [29, 37],
+		popupAnchor: [-3, -25]
+	})
+	L.marker([43.464, -80.528], {icon: heartIcon}).addTo(mymap)
+		.bindPopup(
+			L.popup({minWidth:240})
+			.setContent("<font size=5 color=red>I </font><img src=beatingHeart.gif alt=HEART><font size=5 color=red> GEOG 483</font>")
+		);
+	//***************************************************************************************
+	
+</script>
+
+
+
+</body>
+</html>
